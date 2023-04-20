@@ -12,7 +12,7 @@
 #include "../ChappieUIConfigs.h"
 #include "UI/ui.h"
 
-
+uint8_t count ;
 /* Structure to hold App num and status */
 struct AppManager_t {
     uint16_t totalNum = 0;
@@ -26,7 +26,7 @@ static AppManager_t _app;
 /* Structure to hold device status */
 struct DeviceStatus_t {
     bool updated = false;
-    bool autoScreenOff = false;
+    bool autoScreenOff = true;
     uint8_t brightness = 127;
     uint32_t autoScreenOffTime = 20000;
 };
@@ -223,24 +223,20 @@ namespace App {
         static char date_buffer[30];
         static char week1[6];
         static char month[6];
-        /* Update clock */
         static I2C_BM8563_TimeTypeDef rtc_time;
         static I2C_BM8563_DateTypeDef rtc_date;
-        device->Rtc.getTime(&rtc_time);
         device->Rtc.getDate(&rtc_date);
-        snprintf(label_buffer, 10, "%d:%02d", rtc_time.hours, rtc_time.minutes);
-
         uint8_t week_data = rtc_date.weekDay;
         uint8_t month_data = rtc_date.month;
-        
-        if(week_data == 1){snprintf(week1,3, "Mon");}
+        /* Update clock */
+        device->Rtc.getTime(&rtc_time);
+        if(week_data == 1){snprintf(week1,4, "Mon");}
         else if(week_data == 2){snprintf(week1,4, "Tue");}
         else if(week_data == 3){snprintf(week1,4, "Wed");}
         else if(week_data == 4){snprintf(week1,4, "Thu");}
         else if(week_data == 5){snprintf(week1,4, "Fri");}
         else if(week_data == 6){snprintf(week1,4, "Sat");}
         else if(week_data == 0){snprintf(week1,4, "Sun");}
-        
         if(month_data == 1){snprintf(month,4, "Jan");}
         else if(month_data == 2){snprintf(month,4, "Feb");}
         else if(month_data == 3){snprintf(month,4, "Mar");}
@@ -254,12 +250,17 @@ namespace App {
         else if(month_data == 11){snprintf(month,4, "Nov");}
         else if(month_data == 12){snprintf(month,4, "Dec");}
         snprintf(date_buffer,20,"%s,%s %d",week1,month,rtc_date.date);
-
+        lv_label_set_text(ui_LabelStateBarTime1, date_buffer);
+        snprintf(label_buffer, 10, "%d:%02d", rtc_time.hours, rtc_time.minutes);
         lv_label_set_text(ui_LabelHomeTime, label_buffer);
         lv_label_set_text(ui_LabelStateBarTime, label_buffer);
 
-        lv_label_set_text(ui_LabelStateBarTime1, date_buffer);
-
+        /* Update battery voltage */
+        count++;
+        if(count%4 == 0){
+            lv_bar_set_value(ui_BatteryBar, (device->Pow.readBatPercentage() - 86)*10, LV_ANIM_OFF);
+            count = 0;
+        }
     }
 
 

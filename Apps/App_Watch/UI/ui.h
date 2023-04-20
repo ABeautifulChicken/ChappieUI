@@ -38,6 +38,7 @@ LV_IMG_DECLARE(ui_img_icon_clock_png);    // assets\Icon_Clock.png
 LV_IMG_DECLARE(ui_img_icon_setting_png);    // assets\Icon_Setting.png
 
 
+
 LV_FONT_DECLARE(ui_font_MontserratBold48);
 
 

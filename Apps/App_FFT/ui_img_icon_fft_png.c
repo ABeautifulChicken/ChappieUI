@@ -7,7 +7,7 @@
 #include "lvgl.h"
 
 #ifndef LV_ATTRIBUTE_MEM_ALIGN
-    #define LV_ATTRIBUTE_MEM_ALIGN
+#define LV_ATTRIBUTE_MEM_ALIGN
 #endif
 
 // IMAGE DATA: assets\Icon_FFT.png

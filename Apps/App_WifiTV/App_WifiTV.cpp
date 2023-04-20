@@ -3,17 +3,16 @@
 #include "../../../ChappieBsp/Chappie.h"
 #include <WiFi.h>
 #include "ScreenShotReceiver/TCPReceiver.h"
+#include <WiFiMulti.h>
 
+#define USE_SMART_CONF 0
 
+static WiFiMulti wifiMulti;
 static std::string app_name = "WifiTV";
 static CHAPPIE* device;
 
-
 LV_IMG_DECLARE(ui_img_icon_wifitv_png);
-
-
 static TCPReceiver* _recv;
-
 
 static void _wifi_tv_init()
 {
@@ -23,14 +22,21 @@ static void _wifi_tv_init()
     device->Lcd.setTextColor(TFT_WHITE, TFT_BLACK);
 
     WiFi.mode(WIFI_AP_STA);
-    WiFi.beginSmartConfig();
-
-    device->Lcd.printf("Waiting for SmartConfig...\n");
-    while (!WiFi.smartConfigDone()) { delay(500); }
-
-    device->Lcd.printf("SmartConfig received, connecting WiFi...\n");
-    while (WiFi.status() != WL_CONNECTED) { delay(500); }
-
+    #if USE_SMART_CONF
+        WiFi.beginSmartConfig();
+        device->Lcd.printf("Waiting for SmartConfig...\n");
+        while (!WiFi.smartConfigDone()) { delay(500); }
+        device->Lcd.printf("SmartConfig received, connecting WiFi...\n");
+        while (WiFi.status() != WL_CONNECTED) { delay(500); }
+        device->Lcd.printf("Connected. IP: %s\n", WiFi.localIP().toString().c_str());
+    #else
+        /*Add your wifiAP as wifiMulti.addAP("Your SSID", "Your Passwd");*/
+        wifiMulti.addAP("T", "66668888");
+        wifiMulti.addAP("E", "66668888");
+        WiFi.begin();
+        device->Lcd.printf("Connecting WiFi.\n");
+        while (wifiMulti.run() != WL_CONNECTED) { delay(500);}
+    #endif
     device->Lcd.printf("Connected. IP: %s\n", WiFi.localIP().toString().c_str());
 
     _recv = new TCPReceiver;

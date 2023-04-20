@@ -30,9 +30,8 @@ static esp_now_peer_info_t _peerInfo;
 static bool is_joystick_mode = true;
 
 // REPLACE WITH THE MAC Address of your receiver 
-static uint8_t _broadcastAddress[] = {0x34, 0x85, 0x18, 0x92, 0xE8, 0x84};
+static uint8_t _broadcastAddress[] = {0x34, 0x85, 0x18, 0x91, 0xDE, 0x70};
 // static uint8_t _broadcastAddress[] = {0x34, 0x85, 0x18, 0x92, 0xE8, 0x94};
-
 
 static void _espnow_joystick_sender()
 {

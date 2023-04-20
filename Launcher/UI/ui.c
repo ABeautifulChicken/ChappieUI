@@ -229,7 +229,7 @@ void ui_ScreenLauncher_screen_init(void)
     lv_obj_set_style_border_opa(ui_PanelHome, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LabelHomeTime = lv_label_create(ui_PanelHome);
-    lv_obj_set_width(ui_LabelHomeTime, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_width(ui_LabelHomeTime, LV_SIZE_CONTENT);   /// 1   主屏幕上的时间
     lv_obj_set_height(ui_LabelHomeTime, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_x(ui_LabelHomeTime, 1);
     lv_obj_set_y(ui_LabelHomeTime, -38);
@@ -242,7 +242,7 @@ void ui_ScreenLauncher_screen_init(void)
     lv_obj_set_style_text_font(ui_LabelHomeTime, &ui_font_FontUbuntuBold96, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_LabelStateBarTime1 = lv_label_create(ui_PanelHome);
-    lv_obj_set_width(ui_LabelStateBarTime1, LV_SIZE_CONTENT);   /// 280
+    lv_obj_set_width(ui_LabelStateBarTime1, LV_SIZE_CONTENT);   /// 280       主屏幕上的日期
     lv_obj_set_height(ui_LabelStateBarTime1, LV_SIZE_CONTENT);    /// 28
     lv_obj_set_x(ui_LabelStateBarTime1, 57);
     lv_obj_set_y(ui_LabelStateBarTime1, 85);
@@ -266,7 +266,7 @@ void ui_ScreenLauncher_screen_init(void)
     lv_img_set_zoom(ui_ImgStateBar, 255);
 
     ui_LabelStateBarTime = lv_label_create(ui_ImgStateBar);
-    lv_obj_set_width(ui_LabelStateBarTime, LV_SIZE_CONTENT);   /// 280
+    lv_obj_set_width(ui_LabelStateBarTime, LV_SIZE_CONTENT);   /// 280   副屏状态栏时间
     lv_obj_set_height(ui_LabelStateBarTime, LV_SIZE_CONTENT);    /// 28
     lv_obj_set_align(ui_LabelStateBarTime, LV_ALIGN_CENTER);
     lv_label_set_text(ui_LabelStateBarTime, "21:15");
@@ -288,7 +288,7 @@ void ui_ScreenLauncher_screen_init(void)
     lv_obj_clear_flag(ui_ImgBattery, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
 
     ui_BatteryBar = lv_bar_create(ui_ImgBattery);
-    lv_bar_set_value(ui_BatteryBar, 80, LV_ANIM_OFF);
+    lv_bar_set_value(ui_BatteryBar, 80, LV_ANIM_OFF);//电池图标容量
     lv_obj_set_width(ui_BatteryBar, 17);
     lv_obj_set_height(ui_BatteryBar, 9);
     lv_obj_set_x(ui_BatteryBar, -2);

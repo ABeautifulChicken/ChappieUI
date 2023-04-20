@@ -41,6 +41,7 @@
 #include "App_ESPNOW/App_ESPNOW.h"
 #include "App_WifiTV/App_WifiTV.h"
 #include "App_Gamepad/App_Gamepad.h"
+#include "App_SetTime/App_SetTime.h"
 /* Header files locator */
 /* Don't remove this, or python script's auto login will be failed */
 
@@ -62,6 +63,7 @@ namespace App {
 		App_Login(ESPNOW),
 		App_Login(WifiTV),
 		App_Login(Gamepad),
+		App_Login(SetTime),
 		/* Login locator */
         /* Don't remove this, or python script's auto login will be failed */
 
