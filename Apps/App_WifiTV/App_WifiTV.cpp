@@ -28,7 +28,6 @@ static void _wifi_tv_init()
         while (!WiFi.smartConfigDone()) { delay(500); }
         device->Lcd.printf("SmartConfig received, connecting WiFi...\n");
         while (WiFi.status() != WL_CONNECTED) { delay(500); }
-        device->Lcd.printf("Connected. IP: %s\n", WiFi.localIP().toString().c_str());
     #else
         /*Add your wifiAP as wifiMulti.addAP("Your SSID", "Your Passwd");*/
         wifiMulti.addAP("T", "66668888");
