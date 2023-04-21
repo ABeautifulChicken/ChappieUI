@@ -223,12 +223,12 @@ namespace App {
         static char date_buffer[30];
         static char week1[6];
         static char month[6];
+        /* Update clock */
         static I2C_BM8563_TimeTypeDef rtc_time;
         static I2C_BM8563_DateTypeDef rtc_date;
         device->Rtc.getDate(&rtc_date);
         uint8_t week_data = rtc_date.weekDay;
         uint8_t month_data = rtc_date.month;
-        /* Update clock */
         device->Rtc.getTime(&rtc_time);
         if(week_data == 1){snprintf(week1,4, "Mon");}
         else if(week_data == 2){snprintf(week1,4, "Tue");}
